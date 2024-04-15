@@ -1,11 +1,11 @@
-"use client";
+"use client"
 
-import { ThemeProvider as NextThemesProvider } from "next-themes";
-import type { ThemeProviderProps } from "next-themes/dist/types";
+import { ThemeProvider as NextThemesProvider } from "next-themes"
+import type { ThemeProviderProps } from "next-themes/dist/types"
 
-import { SidebarProvider } from "@/lib/hooks/use-sidebar";
+import { SidebarProvider } from "@/lib/hooks/use-sidebar"
 
-import { TooltipProvider } from "@/components/ui/tooltip";
+import { TooltipProvider } from "@/components/ui/tooltip"
 
 export default function Providers({ children, ...props }: ThemeProviderProps) {
   return (
@@ -14,5 +14,5 @@ export default function Providers({ children, ...props }: ThemeProviderProps) {
         <TooltipProvider>{children}</TooltipProvider>
       </SidebarProvider>
     </NextThemesProvider>
-  );
+  )
 }
