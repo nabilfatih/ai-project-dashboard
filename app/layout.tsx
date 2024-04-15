@@ -18,9 +18,9 @@ import Header from "@/components/template/header"
 export const metadata: Metadata = {
   title: {
     template: "%s - AI Project",
-    default: "AI Project"
+    default: "Vehicle Assembly - AI Project"
   },
-  description: "AI Project"
+  description: "Vehicle Assembly - AI Project"
 }
 
 export const viewport: Viewport = {
