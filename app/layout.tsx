@@ -12,6 +12,8 @@ import { cn } from "@/lib/utils"
 import { Toaster } from "@/components/ui/sonner"
 import TailwindIndicator from "@/components/development/tailwind-indicator"
 import Providers from "@/components/providers"
+import Footer from "@/components/template/footer"
+import Header from "@/components/template/header"
 
 export const metadata: Metadata = {
   title: {
@@ -56,9 +58,11 @@ export default function RootLayout({
         >
           <Toaster />
           <div className="flex min-h-screen flex-col">
+            <Header />
             <main className="flex flex-1 flex-col overflow-hidden">
               {children}
             </main>
+            <Footer />
           </div>
           <TailwindIndicator />
         </Providers>
