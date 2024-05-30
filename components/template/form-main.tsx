@@ -3,6 +3,7 @@
 import { useTransition } from "react"
 import { zodResolver } from "@hookform/resolvers/zod"
 import { useForm } from "react-hook-form"
+import { toast } from "sonner"
 import { z } from "zod"
 
 import { Button } from "@/components/ui/button"
@@ -14,6 +15,7 @@ import {
   FormLabel,
   FormMessage
 } from "@/components/ui/form"
+import { IconSpinner } from "@/components/ui/icons"
 import { Input } from "@/components/ui/input"
 import {
   Select,
@@ -22,8 +24,9 @@ import {
   SelectTrigger,
   SelectValue
 } from "@/components/ui/select"
+import { callingAi } from "@/app/actions/ai"
 
-const formSchema = z.object({
+export const formSchema = z.object({
   fahrzeug_id: z.string().min(2).max(50),
   kopiert_von_id: z.string().min(2).max(50),
   kategorie: z.string().regex(/^[a-zA-Z]+$/),
@@ -72,6 +75,12 @@ export default function FormMain() {
   function onSubmit(values: z.infer<typeof formSchema>) {
     startSubmitTransition(async () => {
       console.log(values)
+      const result = await callingAi(values)
+
+      if (result && "error" in result) {
+        toast.error(result.error)
+        return
+      }
     })
   }
 
@@ -324,7 +333,16 @@ export default function FormMain() {
           />
         </div>
 
-        <Button type="submit">Submit</Button>
+        <Button type="submit">
+          {isSubmitPending ? (
+            <>
+              <IconSpinner className="mr-2 animate-spin" />
+              Submitting...
+            </>
+          ) : (
+            "Submit"
+          )}
+        </Button>
       </form>
     </Form>
   )
