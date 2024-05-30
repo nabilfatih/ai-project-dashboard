@@ -1,5 +1,6 @@
 "use client"
 
+import { useTransition } from "react"
 import { zodResolver } from "@hookform/resolvers/zod"
 import { useForm } from "react-hook-form"
 import { z } from "zod"
@@ -67,8 +68,12 @@ export default function FormMain() {
     }
   })
 
+  const [isSubmitPending, startSubmitTransition] = useTransition()
+
   function onSubmit(values: z.infer<typeof formSchema>) {
-    console.log(values)
+    startSubmitTransition(async () => {
+      console.log(values)
+    })
   }
 
   return (
@@ -263,17 +268,20 @@ export default function FormMain() {
             render={({ field }) => (
               <FormItem>
                 <FormLabel>Sicherheitssystem</FormLabel>
-                <FormControl>
-                  <Select {...field}>
+                <Select
+                  onValueChange={field.onChange}
+                  defaultValue={field.value}
+                >
+                  <FormControl>
                     <SelectTrigger>
-                      <SelectValue />
+                      <SelectValue placeholder="Sicherheitssystem" />
                     </SelectTrigger>
-                    <SelectContent>
-                      <SelectItem value="standard">Standard</SelectItem>
-                      <SelectItem value="komplett">Komplett</SelectItem>
-                    </SelectContent>
-                  </Select>
-                </FormControl>
+                  </FormControl>
+                  <SelectContent>
+                    <SelectItem value="standard">Standard</SelectItem>
+                    <SelectItem value="komplett">Komplett</SelectItem>
+                  </SelectContent>
+                </Select>
                 <FormMessage />
               </FormItem>
             )}
@@ -285,9 +293,12 @@ export default function FormMain() {
               <FormItem>
                 <FormLabel>Parallelfertigung</FormLabel>
                 <FormControl>
-                  <Select {...field}>
+                  <Select
+                    onValueChange={field.onChange}
+                    defaultValue={field.value}
+                  >
                     <SelectTrigger>
-                      <SelectValue />
+                      <SelectValue placeholder="Parallelfertigung" />
                     </SelectTrigger>
                     <SelectContent>
                       <SelectItem value="ja">Ja</SelectItem>
