@@ -32,7 +32,7 @@
     --input: 240 4.88% 83.92%;
     --ring: 240 5.88% 10%;
 
-    --radius: 1rem;
+    --radius: 0.75rem;
   }
 
   .dark {
@@ -57,7 +57,7 @@
     --accent: 240 5.26% 26.08%;
     --accent-foreground: 240 4.76% 95.88%;
 
-    --destructive: 0 62.8% 30.6%;
+    --destructive: 0 62.93% 45.49%;
     --destructive-foreground: 240 4.76% 95.88%;
 
     --border: 240 5.26% 26.08%;
